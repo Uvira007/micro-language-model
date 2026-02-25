@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "micro-lm"
+version = "0.1.0"
+description = "ENcoder-Decoder language model with multi-head attention for data science Q&A"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "datasets>=2.14.0",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+micro-lm-train = "micro_lm.train:main"
+micro-lm-chatbot = "micro_lm.chatbot:main"
+micro-lm-download-stackexchange = "micro_lm.scripts.download_stackexchange:main"
+
+# Restrict test discovery so the IDE doesn't scan .venv
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = [".venv", ".git", "checkpoints", "data"]
